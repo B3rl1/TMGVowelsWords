@@ -33,9 +33,15 @@ namespace Task1.Models.Data
 			}
 		}
 
-		//Подсчёт слов производится разделением всей строки на подстроки с помощью символа пробела.
-		private int CountTheWords() => PlainText.Split(' ').Length;
-		
+		//Подсчёт слов производится разделением всей строки на подстроки с помощью символа пробела и дополнительной проверкой на то, если эта строка содержиться в containPattern.
+		private int CountTheWords()
+		{
+			string containPattern = "–—!?,;";
+			var str = PlainText.Split(' ');
+
+			return str.Where(x => !containPattern.Contains(x)).Count();
+		}
+
 		//Подсчёт гласных букв идёт с помощью просмотра всей начальной строки и поиском вхождения символа в строку VowelsContainer.PatternVowels,
 		//которая представляет все возможные гласные буквы в программе, используя метод бинарного поиска.
 		private int CountTheVowels()
